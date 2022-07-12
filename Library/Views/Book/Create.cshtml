@@ -1,0 +1,31 @@
+﻿<form method="post" asp-controller="Home" asp-action="Create">
+    <div class="form-group col-4">
+        <label for="Title" class="mt-5 fw-bold fs-5">Название</label>
+        <input type="text" class="form-control" id="Title" name="Title" />
+        <label for="Year" class="mt-4 fw-bold fs-5">Год</label>
+        <input type="number" class="form-control" id="Year" name="Year" min="1400" />
+        <label for="Author" class="mt-4 fw-bold fs-5">Автор</label>
+        <select name="AuthorId">
+            @{
+                foreach (var author in Model!.Authors)
+                {
+                    <option value="@author.Id">
+                        @author.Name @author.Surname
+                    </option>
+                }
+            }
+        </select>
+        <label class="fw-bold fs-5">Жанр</label>
+        <select name="GenreId">
+            @{
+                foreach(var genre in Model.Genres)
+                {
+                    <option value="@genre.Id">
+                        @genre.GenreName
+                    </option>
+                }
+            }
+        </select>
+        <input type="submit" class="row mt-3" value="Добавить" />
+    </div>
+</form>

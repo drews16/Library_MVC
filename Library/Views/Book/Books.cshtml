@@ -1,0 +1,44 @@
+﻿@addTagHelper *, Library
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Название</th>
+            <th scope="col">Жанр</th>
+            <th scope="col">Год</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach(var item in Model!.Books)
+        {
+            <tr>
+                <td scope="row">@item.Id.ToString()</td>
+                <td>@item.Author.Name @item.Author.Surname</td>
+                <td>@item.Title</td>
+                <td>@item.Genre.GenreName</td>
+                <td>@item.Year.ToString()</td>
+                <td class="col-1">
+                    <a class="nav-link p-0" asp-controller="Home" asp-action="Edit" asp-route-id="@item.Id">
+                        Редактировать
+                    </a>
+                </td>
+                <td class="col-1">
+                    <a class="nav-link p-0" asp-controller="Home" asp-action="Remove" asp-route-id="@item.Id">
+                        Удалить
+                    </a>
+                </td>
+             </tr>
+         } 
+    }
+    </tbody>
+</table>
+<a class="nav-link px-0" asp-controller="Home" asp-action="Create">
+    Добавить
+</a>
+<page-link page-model="@Model.PageInfo" page-action="Books"></page-link>
+
+
+

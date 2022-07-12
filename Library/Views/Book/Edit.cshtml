@@ -1,0 +1,36 @@
+﻿<form method="post" asp-controller="Home" asp-action="Edit">
+    <div class="form-group col-4">
+        <input type="hidden" name="Id" value="@Model!.Book.Id" />
+        <label for="Title" class="row fw-bold fs-5">Название</label>
+        <input type="text" class="row form-control" id="Title" name="Title" value="@Model!.Book.Title" />
+        <label for="Year" class="row mt-4 fw-bold fs-5">Год</label>
+        <input type="number" class="row form-control" id="Year" name="Year" value="@Model.Book.Year" />
+        <label for="Author" class="row mt-4 fw-bold fs-5">Автор</label>
+        <input type="text" class="row" value="@Model.Book.Author.Name @Model.Book.Author.Surname" readonly />
+        <label class="row mt-4 fw-bold fs-5">Жанр</label>
+        <input type="text" class="row" value="@Model.Book.Genre.GenreName" readonly />
+        <label class="row mt-4 fw-bold fs-5">Новый автор</label>
+        <select name="AuthorId" value="@Model.Book.Author.Name @Model.Book.Author.Surname">
+            @{
+                foreach (var author in Model!.Authors)
+                {
+                    <option value="@author.Id">
+                        @author.Name @author.Surname
+                    </option>
+                }
+            }
+        </select>
+        <label class="row mt-4 fw-bold fs-5">Новый жанр</label>
+        <select name="GenreId">
+            @{
+                foreach(var genre in Model.Genres)
+                {
+                    <option value="@genre.Id">
+                        @genre.GenreName
+                    </option>
+                }
+            }
+        </select>
+        <input type="submit" class="row mt-3" value="Добавить" />
+    </div>
+</form>
