@@ -9,10 +9,11 @@ using System.Text;
 
 namespace Library.Controllers
 {
-    public class HomeController : Controller
+    public class BookController : Controller
     {
         private ApplicationContext _db;
-        public HomeController(ApplicationContext context) => _db = context;
+        public BookController(ApplicationContext context) => _db = context;
+
 
         [HttpGet]
         public async Task<IActionResult> Books(int currentPage = 1)
@@ -21,7 +22,7 @@ namespace Library.Controllers
                 .Include(b => b.Author)
                 .Include(b => b.Genre);
 
-            int itemCount = 2;
+            int itemCount = 4;
 
             int count = await books.CountAsync();
             var items = await books.Skip((currentPage - 1) * itemCount).Take(itemCount).ToListAsync();
